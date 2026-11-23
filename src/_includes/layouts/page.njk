@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+---
+{#- Renders the page's blocks in order. Each block type has its own
+    partial in _includes/blocks/, named after the block's `type`. -#}
+{%- for section in sections %}
+  {%- if section.type == "text" %}
+    {% include "blocks/text.njk" %}
+  {%- elif section.type == "image" %}
+    {% include "blocks/image.njk" %}
+  {%- elif section.type == "two_columns" %}
+    {% include "blocks/two_columns.njk" %}
+  {%- endif %}
+{%- endfor %}

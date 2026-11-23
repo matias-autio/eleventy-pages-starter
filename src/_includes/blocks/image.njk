@@ -1,0 +1,11 @@
+{%- if section.image %}
+<section class="block block-image">
+  <figure>
+    {#- The first block is usually above the fold, so load it right away. #}
+    <img src="{{ section.image }}" alt="{{ section.alt }}" sizes="100vw"{% if loop.first %} loading="eager" fetchpriority="high"{% endif %}>
+    {%- if section.caption %}
+    <figcaption class="container">{{ section.caption }}</figcaption>
+    {%- endif %}
+  </figure>
+</section>
+{%- endif %}

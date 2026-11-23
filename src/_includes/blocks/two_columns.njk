@@ -1,0 +1,12 @@
+<section class="block block-two-columns">
+  <div class="container two-columns{% if section.image_position == 'right' %} two-columns--image-right{% endif %}">
+    <div class="two-columns__image">
+      {%- if section.image %}
+      <img src="{{ section.image }}" alt="{{ section.alt }}" sizes="(min-width: 48rem) 30rem, 100vw">
+      {%- endif %}
+    </div>
+    <div class="two-columns__text prose">
+      {{ section.text | markdown | safe }}
+    </div>
+  </div>
+</section>

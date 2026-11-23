@@ -1,0 +1,112 @@
+# Pages CMS configuration — https://pagescms.org/docs/configuration/
+media:
+  input: src/media
+  output: /media
+  rename: safe
+  categories: [image]
+
+content:
+  # ---------------------------------------------------------------- Pages
+  - name: pages
+    label: Pages
+    type: collection
+    path: src/pages
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title]
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Description (for search engines)
+        type: text
+      - name: sections
+        label: Content blocks
+        type: block
+        list: true
+        blockKey: type
+        blocks:
+          - name: text
+            label: Rich text
+            fields:
+              - name: body
+                label: Text
+                type: rich-text
+                options:
+                  format: markdown
+
+          - name: image
+            label: Image (full width)
+            fields:
+              - name: image
+                label: Image
+                type: image
+              - name: alt
+                label: Alt text (describe the image)
+                type: string
+              - name: caption
+                label: Caption
+                type: string
+
+          - name: two_columns
+            label: Two columns (image + text)
+            fields:
+              - name: image
+                label: Image
+                type: image
+              - name: alt
+                label: Alt text (describe the image)
+                type: string
+              - name: image_position
+                label: Image position
+                type: select
+                default: left
+                options:
+                  values:
+                    - name: left
+                      label: Left
+                    - name: right
+                      label: Right
+              - name: text
+                label: Text
+                type: rich-text
+                options:
+                  format: markdown
+
+  # ----------------------------------------------------------- Navigation
+  - name: navigation
+    label: Navigation
+    type: file
+    path: src/_data/navigation.json
+    format: json
+    list: true
+    fields:
+      - name: label
+        label: Label
+        type: string
+        required: true
+      - name: url
+        label: URL (e.g. /about/)
+        type: string
+        required: true
+
+  # ------------------------------------------------------- Site settings
+  - name: site
+    label: Site settings
+    type: file
+    path: src/_data/site.json
+    format: json
+    fields:
+      - name: title
+        label: Site title
+        type: string
+      - name: description
+        label: Default description
+        type: text
+      - name: language
+        label: Language code (e.g. en)
+        type: string
